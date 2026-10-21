@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEVER CLICK - HORROR</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #030303;
+    color: white;
+    font-family: Georgia, serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.intro {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.intro h1 {
+    color: darkred;
+    font-size: 45px;
+    letter-spacing: 7px;
+    text-shadow: 0 0 25px red;
+    animation: flicker 2s infinite;
+}
+
+.intro p {
+    color: #888;
+    margin: 25px;
+    letter-spacing: 4px;
+}
+
+button {
+    background: #180000;
+    border: 2px solid red;
+    color: red;
+    padding: 20px 40px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 25px red;
+    transition: .3s;
+}
+
+button:hover {
+    background: red;
+    color: black;
+    transform: scale(1.1);
+}
+
+#horror {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.face {
+    position: relative;
+    width: 350px;
+    height: 450px;
+    background: radial-gradient(
+        ellipse at center,
+        #777 0%,
+        #343434 45%,
+        #080808 85%
+    );
+    border-radius: 48% 48% 40% 40%;
+    box-shadow: 0 0 60px red;
+    animation: zoom .18s infinite alternate;
+}
+
+.hair {
+    position: absolute;
+    inset: -35px -35px 0;
+    border-radius: 50% 50% 15% 15%;
+    border-top: 100px solid #050505;
+    z-index: 2;
+}
+
+.eyes {
+    position: absolute;
+    top: 140px;
+    width: 95px;
+    height: 50px;
+    background: black;
+    border-radius: 50%;
+    box-shadow: 0 0 30px red;
+    z-index: 3;
+}
+
+.eyes::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: red;
+    border-radius: 50%;
+    top: 10px;
+    left: 33px;
+    box-shadow: 0 0 30px 10px red;
+}
+
+.eye1 { left: 45px; }
+.eye2 { right: 45px; }
+
+.nose {
+    position: absolute;
+    top: 190px;
+    left: 140px;
+    width: 70px;
+    height: 60px;
+    border-bottom: 15px solid #111;
+    border-radius: 50%;
+}
+
+.mouth {
+    position: absolute;
+    bottom: 40px;
+    left: 35px;
+    width: 280px;
+    height: 125px;
+    background: #080000;
+    border: 5px solid #180000;
+    border-radius: 15% 15% 50% 50%;
+    box-shadow: 0 0 25px red;
+    overflow: hidden;
+}
+
+.teeth {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.teeth span {
+    height: 45px;
+    background: #eee;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.claws {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        105deg,
+        transparent 0px,
+        transparent 80px,
+        rgba(0,0,0,.5) 82px,
+        transparent 85px
+    );
+}
+
+#horror h1 {
+    color: red;
+    font-size: 40px;
+    margin-top: 20px;
+    text-shadow: 0 0 30px red;
+    letter-spacing: 8px;
+}
+
+#horror p {
+    color: white;
+    margin-top: 15px;
+    letter-spacing: 4px;
+}
+
+@keyframes zoom {
+    from {transform: scale(1) rotate(-2deg);}
+    to {transform: scale(1.5) rotate(2deg);}
+}
+
+@keyframes flicker {
+    0%,100% {opacity: 1;}
+    50% {opacity: .3;}
+}
+
+.shake {
+    animation: shake .07s infinite;
+}
+
+@keyframes shake {
+    0% {transform: translate(8px, 5px);}
+    25% {transform: translate(-8px, -5px);}
+    50% {transform: translate(5px, -8px);}
+    75% {transform: translate(-5px, 8px);}
+    100% {transform: translate(8px, 5px);}
+}
+
+.flash {
+    animation: flash .12s infinite;
+}
+
+@keyframes flash {
+    0% {background: black;}
+    50% {background: #650000;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="intro" id="intro">
+    <h1>☠ DON'T OPEN ☠</h1>
+    <p>SOMETHING IS WAITING FOR YOU...</p>
+    <button onclick="startHorror()">
+        CLICK IF YOU DARE
+    </button>
+    <p>YOU HAVE BEEN WARNED.</p>
+</div>
+
+<div id="horror">
+    <div class="face">
+        <div class="hair"></div>
+        <div class="eyes eye1"></div>
+        <div class="eyes eye2"></div>
+        <div class="nose"></div>
+
+        <div class="mouth">
+            <div class="teeth">
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+            </div>
+        </div>
+
+        <div class="claws"></div>
+    </div>
+
+    <h1>IT FOUND YOU!</h1>
+    <p>RUN... BEFORE IT GETS YOU.</p>
+</div>
+
+<script>
+function startHorror() {
+
+    document.getElementById("intro").style.display = "none";
+
+    const horror = document.getElementById("horror");
+    horror.style.display = "flex";
+
+    document.body.classList.add("shake", "flash");
+
+    // Horror scream sound using Web Audio
+    try {
+        const audio = new (window.AudioContext ||
+                           window.webkitAudioContext)();
+
+        const oscillator = audio.createOscillator();
+        const gain = audio.createGain();
+
+        oscillator.type = "sawtooth";
+        oscillator.frequency.setValueAtTime(900, audio.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(
+            90, audio.currentTime + 2
+        );
+
+        gain.gain.setValueAtTime(0.5, audio.currentTime);
+        gain.gain.exponentialRampToValueAtTime(
+            0.01, audio.currentTime + 2.5
+        );
+
+        oscillator.connect(gain);
+        gain.connect(audio.destination);
+
+        oscillator.start();
+        oscillator.stop(audio.currentTime + 2.5);
+
+    } catch(error) {
+        console.log("Audio unavailable");
+    }
+
+    if (navigator.vibrate) {
+        navigator.vibrate([500,100,500,100,800]);
+    }
+}
+</script>
+
+</body>
+</html>
+
